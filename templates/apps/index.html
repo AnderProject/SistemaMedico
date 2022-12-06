@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud de Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+ 
+</head>
+<body>
+    <main class="container-fluid bg-dark">
+        <hr class="border border-warning border-3 opacity-100">   
+        <div class="row my-5 bg-w">
+
+        </div>
+        <div class="row justify-content-md-center bg-white">
+            <div class="col-6 row justify-content-center h-25 p-4">  
+                {% if update %}
+                <form class="w-75" method="post" action={% url "update" %}>
+                    {% csrf_token %}
+                    <div class="mb-3 bg-">
+                        <label for="subject" class="form-label"></label>
+                        <div class="mb-3 ">
+                            <label for="subject" class="form-label text-white">Actualice datos del Paciente</label>
+                            <select class="form-select" value="{{ update.subject }}" name="subject" id="subject" aria-label="Default select example">
+                              <option value="MedicPochita">Pacientes</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Nombres</label>
+                        <textarea type="text" name="subject" class="form-control" id="subject">{{ update.subject }}</textarea>
+                        <br>
+                        <label for="description" class="form-label">Cedula</label>
+                        <textarea type="number" name="description" class="form-control" id="description">{{ update.description }}</textarea>
+                    </div>
+                    <input type="hidden" name="id" value="{{ update.id }}" />
+                    <button type="submit" class="btn btn-primary btn-warning">Aceptar Cambios</button> 
+                </form>
+                {% else %}
+                <form class="w-50" method="post" action={% url "insert" %}>
+                    {% csrf_token %}
+                    <div class="mb-3 ">
+                      <label for="subject" class="form-label text-dark"><h1>Registro para consulta</h1></label>
+                      <select class="form-select" name="subject" id="subject" aria-label="Default select example">
+                        <option value="MedicPochita">Medica</option>
+                      </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label text-white">Datos</label>
+                      <input type="text" placeholder="Ingrese Nombres y Apellidos" name="subject" class="form-control" id="subject">
+                      <br>
+                      <input type="number" placeholder="Ingrese número de cédula" name="description" class="form-control" id="description">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear turno</button>
+                  </form>
+                {% endif %}
+            </div>
+            <div class="col-5 container justify-content-center">
+            {% for data in db_data %}
+                <br>
+                
+                <div class="card bg-primary" style="width: 30rem;">
+                    <div class="card-body bg-success">
+                        <h5><div class="alert alert-warning" role="alert">
+                            Registro su turno con exito
+                          </div></h5>
+                        <h5 class="card-title bg-white">Datos del Paciente</h5>
+                        <h6><p class="card-text bg-white">Turno: {{ data.id }}</p></h6>
+                        <h6><p class="card-text bg-white">Nombre: {{ data.subject }}</p></h6>
+                        <h6><p class="card-number bg-white">Cedula: {{ data.description }}</p></h6>
+                        <a href={% url "update_form" data.id %} class="btn btn-dark">Actualizar/Modificar</a>
+                        <a href={% url "delete" data.id %}  onclick="return confirm('Estás seguro que deseas eliminar el registro?');" class="btn btn-danger">Eliminar</a>
+                    </div>
+                    
+                </div>
+            {% endfor %}        
+            </div>
+        </div>
+        <hr>
+
+    </main>
+</body>
+</html>

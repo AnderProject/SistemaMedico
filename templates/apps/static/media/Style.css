@@ -1,0 +1,51 @@
+footer {
+    background-color: darkgoldenrod;
+    padding-bottom: 0.1px;
+}
+
+.seccion_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    margin-top: 300px;
+}
+
+.contactanos {
+    width: 40%;
+    color: white;
+}
+
+.contactanos p {
+    font-weight: 200px;
+    font-family: cursive;
+}
+
+.redessociales {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.redessociales_icon {
+    display: inline-block;
+    margin-left: 20px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+}
+
+.redessociales_icon:hover {
+    background: white;
+    color: darkgoldenrod;
+}
+
+.redessociales_icon i {
+    font-size: 30px;
+    line-height: 60px;
+}
